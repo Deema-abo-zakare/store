@@ -5,7 +5,7 @@
         <div class="container">
             <!-- زر إضافة منتج جديد -->
             <div class="text-center mb-4">
-                <a href="{{ url('products/create') }}" class="btn btn-warning">
+                <a href="{{ route('product_create') }}" class="btn btn-warning">
                     <i class="fas fa-plus"></i> إضافة منتج جديد
                 </a>
             </div>
@@ -26,9 +26,9 @@
                 <tbody class="table-light">
                     @foreach ($products as $key => $product)
                         <tr class="align-middle">
-                            <th scope="row" class="bg-secondary text-white">{{ $key + 1 }}</th>
+                            <th scope="row" class="bg-secondary text-white">{{ ++$key }}</th>
                             <td>{{ $product->name }}</td>
-                            <td>{{ optional($categories->firstWhere('id', $product->category_id))->name ?? 'غير محدد' }}</td>
+                            <td> {{ $product->category->name }}</td>
                             <td class="text-success fw-bold">{{ $product->price }}$</td>
                             <td class="text-primary">{{ $product->quantity }}</td>
                             <td>{{ $product->description }}</td>
@@ -47,6 +47,7 @@
                     @endforeach
                 </tbody>
             </table>
+            {{ $products->links() }}
         </div>
     </div>
 @endsection

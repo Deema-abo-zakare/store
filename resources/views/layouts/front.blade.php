@@ -17,7 +17,7 @@
     <link href="{{ asset('assets/dist/css/bootstrap.rtl.min.css') }}" rel="stylesheet">
     <style>
         .combo-container {
-            position: fixed;
+            position: ;
             top: 20%;
             right: 0;
             padding: 10px;

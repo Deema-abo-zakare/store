@@ -2,16 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
-use App\Models\Product;
+use App\Models\admin\Category;
+use App\Models\admin\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
+    public function __construct()
+    {
+       $this->middleware('auth');
+
+    }
+
     public function index()
     {
+
         $categories = Category::all();
-        $products = Product::all();
+      //  $products = Product::all();
+      $products = Product::where('user_id', Auth::id())->paginate(2);
+
         return view('admin.products.index', compact('products','categories'));
     }
 
@@ -36,9 +46,11 @@ class ProductController extends Controller
     $Product = new Product;
     $Product->name = $request->name;
     $Product->quantity = $request->quantity;
-    $Product->price = $request->price;
+    $Product->price = (float)$request->price;
     $Product->description = $request->description;
     $Product->category_id = $request->category_id;
+    $Product->user_id = Auth::id();
+
     $Product->save();
     return redirect()->back();
 }

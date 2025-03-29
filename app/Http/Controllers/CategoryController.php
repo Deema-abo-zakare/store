@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Category;
+use App\Models\admin\Category;
 class CategoryController extends Controller
 {
     public function index()
@@ -23,6 +23,7 @@ class CategoryController extends Controller
             'name' => 'required|max:10|min:3',
 
          ]);
+
     $categories = new Category();
     $categories->name = $request->name;
     $categories->save();

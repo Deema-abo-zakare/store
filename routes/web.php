@@ -16,7 +16,7 @@ Route::get('admin/products/create', function () {
 //dashboard Routes
 //products
 Route::get('products', [ProductController::class, 'index']);
-Route::get('products/create', [ProductController::class, 'create']);
+Route::get('products/create', [ProductController::class, 'create'])->name('product_create');
 Route::post('products/store', [ProductController::class, 'store']);
 Route::get('products/edit/{id}', [ProductController::class, 'edit']);
 Route::get('products/delete/{id}', [ProductController::class, 'destroy']);
@@ -30,6 +30,13 @@ Route::get('categories/delete/{id}', [CategoryController::class, 'destroy']);
 Route::patch('categories/update/{id}', [CategoryController::class, 'update']);
 //Front page Route
 Route::get('/', [FrontController::class, 'index'] );
-Route::get('ملابس', function(){
-      return view('home.ملابس');
-  });
+
+
+
+Auth::routes();
+//Route::get('/', [App\Http\Controllers\ProductController::class, 'index'] );
+
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
